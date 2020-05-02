@@ -1,0 +1,13 @@
+name: Prkr
+main: com.luzinsk.prkr.Prkr
+version: 1.0
+description: Parkour plugin for checkpoints & speedruns
+author: Ethan Pilz, Carlton Wu
+commands:
+  prkr:
+    description: Prkr commands
+
+permissions:
+  Prkr.setcp:
+    description: Allows user to set a checkpoint
+    default: true

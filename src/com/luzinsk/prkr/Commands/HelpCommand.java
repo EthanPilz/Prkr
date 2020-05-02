@@ -12,14 +12,16 @@ public class HelpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 
-        if (sender.hasPermission("prkr.help")){
-            sender.sendMessage(ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "--------------------" + ChatColor.GREEN + "" + ChatColor.BOLD + " Prkr "
-                    + ChatColor.RESET + ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "--------------------");
-            sender.sendMessage(prkrPrefix + "we will fill this shit in laterrrrrr");
+        if (sender.hasPermission("prkr.help")) {
+                if (args[0] == "help") {
+                    if (args.length == 2){
+                        sender.sendMessage(ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "--------------------" + ChatColor.GREEN + ""
+                                + ChatColor.BOLD + " Prkr " + ChatColor.RESET + ChatColor.YELLOW + "" + ChatColor.STRIKETHROUGH + "--------------------");
+                        sender.sendMessage(prkrPrefix + "we will fill this shit in laterrrrrr");
+                    }
+                }
         }
         return true;
     }
-
-
 
 }
