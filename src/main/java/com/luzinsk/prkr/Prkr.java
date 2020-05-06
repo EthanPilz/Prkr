@@ -28,7 +28,7 @@ public class Prkr extends JavaPlugin {
         checkpointController = new CheckpointController();
 
         //Files
-        this.data = new DataManager(this);
+       // this.data = new DataManager(this);
 
         //Commands
         getCommand("prkr").setExecutor(new HelpCommand());

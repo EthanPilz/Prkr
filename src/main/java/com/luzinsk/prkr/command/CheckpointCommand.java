@@ -2,10 +2,13 @@ package com.luzinsk.prkr.command;
 
 import com.luzinsk.prkr.Prkr;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Optional;
 
 public class CheckpointCommand implements CommandExecutor {
     @Override
@@ -18,8 +21,14 @@ public class CheckpointCommand implements CommandExecutor {
             sender.sendMessage("Console can't retrieve checkpoints.");
 
         } else {
-            player.teleport(Prkr.checkpointController.getCheckpoint(player));
-            sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Teleported to checkpoint.");
+            Optional<Location> playerLocation = Prkr.checkpointController.getCheckpoint(player);
+            if(playerLocation.isPresent()){
+                player.teleport(playerLocation.get());
+                sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Teleported to checkpoint.");
+            } else {
+                sender.sendMessage(Prkr.prkrPrefix + ChatColor.RED + "No checkpoint set");
+            }
+
         }
         return true;
     }
