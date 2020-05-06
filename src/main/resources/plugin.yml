@@ -6,7 +6,10 @@ author: Ethan Pilz, Carlton Wu
 commands:
   prkr:
     description: Prkr commands
-
+  setcp:
+    description: Set checkpoint
+  cp:
+    description: Teleport to checkpoint
 permissions:
   Prkr.setcp:
     description: Allows user to set a checkpoint

@@ -1,4 +1,4 @@
-package com.luzinsk.prkr.Files;
+package com.luzinsk.prkr.files;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

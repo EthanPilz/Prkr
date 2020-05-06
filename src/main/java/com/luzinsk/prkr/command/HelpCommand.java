@@ -1,4 +1,4 @@
-package com.luzinsk.prkr.Commands;
+package com.luzinsk.prkr.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
