@@ -5,6 +5,7 @@ import com.luzinsk.prkr.command.HelpCommand;
 import com.luzinsk.prkr.command.SetCheckpointCommand;
 import com.luzinsk.prkr.controller.CheckpointController;
 import com.luzinsk.prkr.files.DataManager;
+import com.luzinsk.prkr.listener.PlayerSignListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +24,9 @@ public class Prkr extends JavaPlugin {
 
         //Logger
         Bukkit.getLogger().log(Level.INFO, prkrPrefix + ChatColor.YELLOW + "Prkr enabled.");
+
+        //Listener
+        getServer().getPluginManager().registerEvents(new PlayerSignListener(), this);
 
         //Controller
         checkpointController = new CheckpointController();
