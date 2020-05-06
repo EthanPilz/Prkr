@@ -15,6 +15,9 @@ public class Prkr extends JavaPlugin {
     @Override
     public void onEnable(){
 
+        //Logger
+        Bukkit.getLogger().log(Level.INFO, prkrPrefix + ChatColor.YELLOW + "Prkr enabled.");
+
         //Files
         this.data = new DataManager(this);
 
@@ -26,7 +29,7 @@ public class Prkr extends JavaPlugin {
     @Override
     public void onDisable(){
 
-        Bukkit.getLogger().log(Level.INFO, prkrPrefix + ChatColor.RED + "Prkr disabled.");
+        Bukkit.getLogger().log(Level.INFO, prkrPrefix + ChatColor.YELLOW + "Prkr disabled.");
 
     }
 
