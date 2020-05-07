@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class PlayerSignListener implements Listener {
 
+    @SuppressWarnings("unused")
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void checkpointSignClick(PlayerInteractEvent event) {
 

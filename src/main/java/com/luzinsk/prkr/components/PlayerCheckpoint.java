@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class PlayerCheckpoint {
+
     private Player player;
     private String uuid;
     private Location location;

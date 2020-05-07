@@ -23,7 +23,7 @@ public class CheckpointCommand implements CommandExecutor {
             sender.sendMessage("Console can't retrieve checkpoints.");
 
         } else {
-            Optional<Location> playerLocation = null;
+            Optional<Location> playerLocation = Optional.empty();
             try {
                 playerLocation = Prkr.checkpointController.getCheckpoint(player);
             } catch (SQLException e) {

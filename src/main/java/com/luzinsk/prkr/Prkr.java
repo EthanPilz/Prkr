@@ -4,13 +4,15 @@ import com.luzinsk.prkr.command.CheckpointCommand;
 import com.luzinsk.prkr.command.HelpCommand;
 import com.luzinsk.prkr.command.SetCheckpointCommand;
 import com.luzinsk.prkr.controller.CheckpointController;
-import com.luzinsk.prkr.files.DataManager;
+//import com.luzinsk.prkr.files.DataManager;
 import com.luzinsk.prkr.io.InputOutput;
 import com.luzinsk.prkr.listener.PlayerSignListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +22,7 @@ public class Prkr extends JavaPlugin {
     public static final String prkrPrefix = ChatColor.AQUA + "[Prkr] " + ChatColor.GOLD;
     public static Plugin instance;
     public static final Logger log = Logger.getLogger("Minecraft");
-    public DataManager data;
+    //public DataManager data;
     public static CheckpointController checkpointController;
     public static InputOutput inputOutput;
 
@@ -44,9 +46,9 @@ public class Prkr extends JavaPlugin {
         instance = this;
 
         //Commands
-        getCommand("prkr").setExecutor(new HelpCommand());
-        getCommand("setcp").setExecutor(new SetCheckpointCommand());
-        getCommand("cp").setExecutor(new CheckpointCommand());
+        Objects.requireNonNull(getCommand("prkr")).setExecutor(new HelpCommand());
+        Objects.requireNonNull(getCommand("setcp")).setExecutor(new SetCheckpointCommand());
+        Objects.requireNonNull(getCommand("cp")).setExecutor(new CheckpointCommand());
 
         //InputOutput
         inputOutput = new InputOutput();
