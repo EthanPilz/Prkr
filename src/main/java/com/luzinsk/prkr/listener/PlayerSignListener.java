@@ -25,7 +25,7 @@ public class PlayerSignListener implements Listener {
 
         if (clickedState instanceof Sign) {
             Sign sign = (Sign) clickedState;
-            String line1 = sign.getLine(0);
+            String line1 = sign.getLine(1);
 
             if (line1.equalsIgnoreCase("[Checkpoint]")) {
                 Prkr.checkpointController.registerCheckpoint(new PlayerCheckpoint(player, player.getLocation()));

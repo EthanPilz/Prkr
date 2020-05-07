@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class Prkr extends JavaPlugin {
 
-    public static final String prkrPrefix = ChatColor.AQUA + "[Prkr] ";
+    public static final String prkrPrefix = ChatColor.AQUA + "[Prkr] " + ChatColor.GOLD;
     public static Plugin instance;
     public static final Logger log = Logger.getLogger("Minecraft");
     public DataManager data;
@@ -42,8 +42,6 @@ public class Prkr extends JavaPlugin {
 
         //Instance
         instance = this;
-
-
 
         //Commands
         getCommand("prkr").setExecutor(new HelpCommand());
