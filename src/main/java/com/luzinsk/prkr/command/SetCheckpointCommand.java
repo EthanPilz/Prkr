@@ -1,7 +1,9 @@
 package com.luzinsk.prkr.command;
 
 
+import com.comphenix.protocol.PacketType;
 import com.luzinsk.prkr.Prkr;
+import com.luzinsk.prkr.components.PlayerCheckpoint;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -21,7 +23,8 @@ public class SetCheckpointCommand implements CommandExecutor {
             Bukkit.getLogger().log(Level.SEVERE,   ChatColor.RED + "Checkpoints cannot be set by console, clearly :)))))");
         }
         if (sender.hasPermission("prkr.setcp")) {
-            Prkr.checkpointController.registerCheckpoint(player, player.getLocation());
+            PlayerCheckpoint cp = new PlayerCheckpoint(player, player.getLocation());
+            Prkr.checkpointController.registerCheckpoint(cp);
             sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
 
             }

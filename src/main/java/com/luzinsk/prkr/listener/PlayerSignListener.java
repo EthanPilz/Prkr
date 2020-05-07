@@ -1,6 +1,7 @@
 package com.luzinsk.prkr.listener;
 
 import com.luzinsk.prkr.Prkr;
+import com.luzinsk.prkr.components.PlayerCheckpoint;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -27,7 +28,7 @@ public class PlayerSignListener implements Listener {
             String line1 = sign.getLine(0);
 
             if (line1.equalsIgnoreCase("[Checkpoint]")) {
-                Prkr.checkpointController.registerCheckpoint(player, player.getLocation());
+                Prkr.checkpointController.registerCheckpoint(new PlayerCheckpoint(player, player.getLocation()));
                 player.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
 
                 player.getInventory().clear();

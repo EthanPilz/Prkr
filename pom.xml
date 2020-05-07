@@ -71,7 +71,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
                 <configuration>
-                    <outputDirectory>/Users/ethan/Desktop/Spigot/plugins</outputDirectory>
+                    <outputDirectory>/Users/Carlton/Desktop/1.15.2/_Server_/plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

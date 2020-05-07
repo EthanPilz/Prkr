@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class CheckpointCommand implements CommandExecutor {
@@ -21,7 +22,12 @@ public class CheckpointCommand implements CommandExecutor {
             sender.sendMessage("Console can't retrieve checkpoints.");
 
         } else {
-            Optional<Location> playerLocation = Prkr.checkpointController.getCheckpoint(player);
+            Optional<Location> playerLocation = null;
+            try {
+                playerLocation = Prkr.checkpointController.getCheckpoint(player);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if(playerLocation.isPresent()){
                 player.teleport(playerLocation.get());
                 sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Teleported to checkpoint.");
