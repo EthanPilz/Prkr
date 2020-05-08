@@ -11,7 +11,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class SetCheckpointCommand implements CommandExecutor {
@@ -31,6 +30,15 @@ public class SetCheckpointCommand implements CommandExecutor {
                 e.printStackTrace();
             }
             sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
+            Prkr.checkpointController.registerCheckpoint(cp);
+            sender.sendMessage(Prkr.prkrPrefix + "Checkpoint set.");
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+
+            } else {
+            sender.sendMessage(Prkr.prkrPrefix + ChatColor.RED + "Sorry, but you're missing permissions to do"
+                + ChatColor.AQUA + "" + ChatColor.BOLD + "setcp" + ChatColor.RESET + ChatColor.RED + ". " + ChatColor.RED
+                    + "You'll need" + ChatColor.GOLD + " prkr.setcp " + ChatColor.RED + "to do that.");
+            player.playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, 1, 1);
 
             }
         return true;

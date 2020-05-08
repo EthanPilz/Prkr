@@ -18,6 +18,8 @@ import java.sql.SQLException;
 
 public class PlayerSignListener implements Listener {
 
+    @SuppressWarnings("unused")
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void checkpointSignClick(PlayerInteractEvent event) throws SQLException {
 
@@ -27,7 +29,7 @@ public class PlayerSignListener implements Listener {
 
         if (clickedState instanceof Sign) {
             Sign sign = (Sign) clickedState;
-            String line1 = sign.getLine(0);
+            String line1 = sign.getLine(1);
 
             if (line1.equalsIgnoreCase("[Checkpoint]")) {
                 Prkr.checkpointController.registerCheckpoint(new PlayerCheckpoint(player, player.getLocation()));
