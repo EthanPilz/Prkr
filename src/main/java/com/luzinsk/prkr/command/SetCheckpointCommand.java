@@ -6,11 +6,13 @@ import com.luzinsk.prkr.Prkr;
 import com.luzinsk.prkr.components.PlayerCheckpoint;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class SetCheckpointCommand implements CommandExecutor {
@@ -30,7 +32,11 @@ public class SetCheckpointCommand implements CommandExecutor {
                 e.printStackTrace();
             }
             sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
-            Prkr.checkpointController.registerCheckpoint(cp);
+            try {
+                Prkr.checkpointController.registerCheckpoint(cp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             sender.sendMessage(Prkr.prkrPrefix + "Checkpoint set.");
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
