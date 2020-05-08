@@ -3,6 +3,7 @@ package com.luzinsk.prkr.io;
 
 import com.luzinsk.prkr.Prkr;
 import com.luzinsk.prkr.components.PlayerCheckpoint;
+import com.luzinsk.prkr.exceptions.SaveToDatabaseException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -101,7 +102,7 @@ public class InputOutput {
         }
     }
 
-    public void storePlayerCheckpoint(PlayerCheckpoint cp) {
+    public void storePlayerCheckpoint(PlayerCheckpoint cp) throws SaveToDatabaseException {
         try
         {
             String sql;
@@ -124,7 +125,7 @@ public class InputOutput {
         catch (SQLException e)
         {
             Prkr.log.log(Level.WARNING, Prkr.prkrPrefix + "Encountered an error while attempting to store a player checkpoint to the database: " + e.getMessage());
-            // throw new SaveToDatabaseException();
+            throw new SaveToDatabaseException();
         }
     }
 
