@@ -14,10 +14,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.sql.SQLException;
+
 public class PlayerSignListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void checkpointSignClick(PlayerInteractEvent event) {
+    public void checkpointSignClick(PlayerInteractEvent event) throws SQLException {
 
         Player player = event.getPlayer();
         Block clickedBlock = event.getClickedBlock();

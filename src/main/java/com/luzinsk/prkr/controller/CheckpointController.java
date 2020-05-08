@@ -20,25 +20,24 @@ public class CheckpointController {
 
     }
 
-    public void registerCheckpoint(PlayerCheckpoint cp) {
+    public void registerCheckpoint(PlayerCheckpoint cp) throws SQLException {
         checkpoints.put(cp.getUUID(), cp.getLocation());
+        if (Prkr.inputOutput.getPlayerCheckpoint(cp.getPlayer()) != null)
+            Prkr.inputOutput.deletePlayerCheckpoint(cp.getPlayer());
         Prkr.inputOutput.storePlayerCheckpoint(cp);
     }
 
     public Optional<Location> getCheckpoint(Player player) throws SQLException {
-        player.sendMessage("bob gcp");
 
         if(checkpoints.containsKey(player.getUniqueId().toString())) {
 
             return Optional.of(checkpoints.get(player.getUniqueId().toString()));
 
         } else if (Prkr.inputOutput.getPlayerCheckpoint(player) != null) {
-            player.sendMessage("bob");
             PlayerCheckpoint cp = Prkr.inputOutput.getPlayerCheckpoint(player);
             return Optional.of(cp.getLocation());
         }
         else {
-            player.sendMessage("bob empty");
             return Optional.empty();
         }
     }

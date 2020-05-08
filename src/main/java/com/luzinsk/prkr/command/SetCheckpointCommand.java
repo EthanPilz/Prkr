@@ -11,6 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class SetCheckpointCommand implements CommandExecutor {
@@ -24,7 +25,11 @@ public class SetCheckpointCommand implements CommandExecutor {
         }
         if (sender.hasPermission("prkr.setcp")) {
             PlayerCheckpoint cp = new PlayerCheckpoint(player, player.getLocation());
-            Prkr.checkpointController.registerCheckpoint(cp);
+            try {
+                Prkr.checkpointController.registerCheckpoint(cp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
 
             }

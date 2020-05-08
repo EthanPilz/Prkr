@@ -3,7 +3,6 @@ package com.luzinsk.prkr.io;
 
 import com.luzinsk.prkr.Prkr;
 import com.luzinsk.prkr.components.PlayerCheckpoint;
-import net.minecraft.server.v1_15_R1.IPlayerFileData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -85,7 +84,7 @@ public class InputOutput {
         try
         {
             st = conn.createStatement();
-            st.executeUpdate("CREATE TABLE IF NOT EXISTS \"prkr_player_checkpoints\" (\"UUID\" TEXT, \"X\" DOUBLE, \"Y\" DOUBLE, \"Z\" DOUBLE, \"Pitch\" FLOAT, \"Yaw\" FLOAT, \"World\" TEXT, PRIMARY KEY(UUID)");
+            st.executeUpdate("CREATE TABLE IF NOT EXISTS \"prkr_player_checkpoints\" (\"UUID\" VARCHAR PRIMARY KEY NOT NULL, \"X\" DOUBLE, \"Y\" DOUBLE, \"Z\" DOUBLE, \"Pitch\" FLOAT, \"Yaw\" FLOAT, \"World\" VARCHAR, PRIMARY KEY(UUID)");
 
             conn.commit();
             st.close();
@@ -111,7 +110,7 @@ public class InputOutput {
             sql = "INSERT INTO prkr_player_checkpoints (`UUID`, `X`, `Y`, `Z`, `Pitch`, `Yaw`, `World`) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
-            preparedStatement.setString(1, cp.getUUID());
+            preparedStatement.setString(1, cp.getPlayer().getUniqueId().toString());
             preparedStatement.setDouble(2, cp.getLocation().getX());
             preparedStatement.setDouble(3, cp.getLocation().getY());
             preparedStatement.setDouble(4, cp.getLocation().getZ());
@@ -145,6 +144,15 @@ public class InputOutput {
             return null;
         else
             return (new PlayerCheckpoint(player, loc));
+    }
+
+    public void deletePlayerCheckpoint(Player player) throws SQLException {
+
+        Connection conn = InputOutput.getConnection();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM `prkr_player_checkpoints` WHERE `UUID` = " + player.getUniqueId().toString());
+        ResultSet result = ps.executeQuery();
+
+        result.next();
     }
 }
 

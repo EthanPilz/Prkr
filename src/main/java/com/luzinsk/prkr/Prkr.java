@@ -58,9 +58,8 @@ public class Prkr extends JavaPlugin {
 
     @Override
     public void onDisable(){
-
         Bukkit.getLogger().log(Level.INFO, prkrPrefix + ChatColor.YELLOW + "Prkr disabled.");
-
+        inputOutput.freeConnection();
     }
 
 
