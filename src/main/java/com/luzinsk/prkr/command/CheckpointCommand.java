@@ -34,7 +34,7 @@ public class CheckpointCommand implements CommandExecutor {
                 if (playerLocation.isPresent()) {
                     player.teleport(playerLocation.get());
                     sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Teleported to checkpoint.");
-                    player.playSound(player.getLocation(), Sound.ENTITY_PARROT_IMITATE_ENDERMITE, 1, 1);
+
                 } else {
                     sender.sendMessage(Prkr.prkrPrefix + ChatColor.RED + "No checkpoint set");
                 }

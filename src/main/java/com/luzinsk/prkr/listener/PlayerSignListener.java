@@ -2,6 +2,7 @@ package com.luzinsk.prkr.listener;
 
 import com.luzinsk.prkr.Prkr;
 import com.luzinsk.prkr.components.PlayerCheckpoint;
+import com.luzinsk.prkr.exceptions.SaveToDatabaseException;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,10 +19,8 @@ import java.sql.SQLException;
 
 public class PlayerSignListener implements Listener {
 
-    @SuppressWarnings("unused")
-
     @EventHandler(priority = EventPriority.NORMAL)
-    public void checkpointSignClick(PlayerInteractEvent event) throws SQLException {
+    public void checkpointSignClick(PlayerInteractEvent event) throws SQLException, SaveToDatabaseException {
 
         Player player = event.getPlayer();
         Block clickedBlock = event.getClickedBlock();
@@ -33,7 +32,6 @@ public class PlayerSignListener implements Listener {
 
             if (line1.equalsIgnoreCase("[Checkpoint]")) {
                 Prkr.checkpointController.registerCheckpoint(new PlayerCheckpoint(player, player.getLocation()));
-                player.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
 
                 player.getInventory().clear();
                 player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 16));

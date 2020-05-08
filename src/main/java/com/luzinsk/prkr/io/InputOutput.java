@@ -85,7 +85,7 @@ public class InputOutput {
         try
         {
             st = conn.createStatement();
-            st.executeUpdate("CREATE TABLE IF NOT EXISTS \"prkr_player_checkpoints\" (\"UUID\" VARCHAR PRIMARY KEY NOT NULL, \"X\" DOUBLE, \"Y\" DOUBLE, \"Z\" DOUBLE, \"Pitch\" FLOAT, \"Yaw\" FLOAT, \"World\" VARCHAR, PRIMARY KEY(UUID)");
+            st.executeUpdate("CREATE TABLE IF NOT EXISTS \"prkr_player_checkpoints\" (\"UUID\" VARCHAR PRIMARY KEY NOT NULL, \"X\" DOUBLE, \"Y\" DOUBLE, \"Z\" DOUBLE, \"Pitch\" FLOAT, \"Yaw\" FLOAT, \"World\" VARCHAR)");
 
             conn.commit();
             st.close();
@@ -121,6 +121,7 @@ public class InputOutput {
 
             preparedStatement.executeUpdate();
             conn.commit();
+            preparedStatement.close();
         }
         catch (SQLException e)
         {
@@ -132,7 +133,8 @@ public class InputOutput {
     public PlayerCheckpoint getPlayerCheckpoint(Player player) throws SQLException {
 
         Connection conn = InputOutput.getConnection();
-        PreparedStatement ps = conn.prepareStatement("SELECT `X`, `Y`, `Z`, `Pitch`, `Yaw`, `World` FROM `prkr_player_checkpoints` WHERE `UUID`=" + player.getUniqueId().toString());
+        PreparedStatement ps = conn.prepareStatement("SELECT `X`, `Y`, `Z`, `Pitch`, `Yaw`, `World` FROM `prkr_player_checkpoints` WHERE `UUID` = ?");
+        ps.setString(1, player.getUniqueId().toString());
         ResultSet result = ps.executeQuery();
 
         Location loc = null;
@@ -141,19 +143,22 @@ public class InputOutput {
             loc = new Location(Bukkit.getWorld(result.getString("World")), result.getDouble("X"), result.getDouble("Y"), result.getDouble("Z"), result.getFloat("Yaw"), result.getFloat("Pitch"));
 
         }
+        ps.close();
         if (loc == null)
             return null;
         else
             return (new PlayerCheckpoint(player, loc));
+
     }
 
     public void deletePlayerCheckpoint(Player player) throws SQLException {
 
         Connection conn = InputOutput.getConnection();
-        PreparedStatement ps = conn.prepareStatement("DELETE FROM `prkr_player_checkpoints` WHERE `UUID` = " + player.getUniqueId().toString());
-        ResultSet result = ps.executeQuery();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM `prkr_player_checkpoints` WHERE `UUID` = ?");
+        ps.setString(1, player.getUniqueId().toString());
+        ps.executeUpdate();
+        ps.close();
 
-        result.next();
     }
 }
 

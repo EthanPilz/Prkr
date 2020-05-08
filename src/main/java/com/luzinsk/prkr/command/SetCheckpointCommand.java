@@ -1,9 +1,8 @@
 package com.luzinsk.prkr.command;
 
-
-import com.comphenix.protocol.PacketType;
 import com.luzinsk.prkr.Prkr;
 import com.luzinsk.prkr.components.PlayerCheckpoint;
+import com.luzinsk.prkr.exceptions.SaveToDatabaseException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -25,22 +24,19 @@ public class SetCheckpointCommand implements CommandExecutor {
             Bukkit.getLogger().log(Level.SEVERE,   ChatColor.RED + "Checkpoints cannot be set by console, clearly :)))))");
         }
         if (sender.hasPermission("prkr.setcp")) {
+
             PlayerCheckpoint cp = new PlayerCheckpoint(player, player.getLocation());
+
             try {
                 Prkr.checkpointController.registerCheckpoint(cp);
-            } catch (SQLException e) {
+            } catch (SaveToDatabaseException | SQLException e) {
                 e.printStackTrace();
             }
-            sender.sendMessage(Prkr.prkrPrefix + ChatColor.YELLOW + "Checkpoint set.");
-            try {
-                Prkr.checkpointController.registerCheckpoint(cp);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            sender.sendMessage(Prkr.prkrPrefix + "Checkpoint set.");
-            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+
+
 
             } else {
+
             sender.sendMessage(Prkr.prkrPrefix + ChatColor.RED + "Sorry, but you're missing permissions to do"
                 + ChatColor.AQUA + "" + ChatColor.BOLD + "setcp" + ChatColor.RESET + ChatColor.RED + ". " + ChatColor.RED
                     + "You'll need" + ChatColor.GOLD + " prkr.setcp " + ChatColor.RED + "to do that.");
